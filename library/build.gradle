@@ -4,9 +4,11 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 8
+        minSdkVersion 24
         targetSdkVersion 27
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
-
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'

@@ -1,5 +1,6 @@
 /*
  * Copyright 2012 Lars Werkman
+ * Copyright 2021 Juraj Antal
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,8 +31,6 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.larswerkman.holocolorpicker.R;
 
 /**
  * Displays a holo-themed color picker.
@@ -874,11 +873,22 @@ public class ColorPicker extends View {
 		setNewCenterColor(currentColor);
 	}
 
-        public void setTouchAnywhereOnColorWheelEnabled(boolean TouchAnywhereOnColorWheelEnabled){
-                mTouchAnywhereOnColorWheelEnabled = TouchAnywhereOnColorWheelEnabled;
-        }
+	public void setTouchAnywhereOnColorWheelEnabled(boolean TouchAnywhereOnColorWheelEnabled){
+			mTouchAnywhereOnColorWheelEnabled = TouchAnywhereOnColorWheelEnabled;
+	}
 
-        public boolean getTouchAnywhereOnColorWheel(){
-                return mTouchAnywhereOnColorWheelEnabled;
-        }
+	public boolean getTouchAnywhereOnColorWheel(){
+			return mTouchAnywhereOnColorWheelEnabled;
+	}
+
+	/**
+	 * Turn the color wheel by the specified angle (in degrees)
+	 * @param degrees angle to move the color wheel pointer
+	 */
+	public void turnColorWheel(float degrees) {
+		float angle = colorToAngle(mColor);
+		angle += Math.toRadians(degrees);
+		int color = calculateColor(angle);
+		setColor(color);
+	}
 }

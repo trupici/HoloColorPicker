@@ -17,6 +17,11 @@ Now bars can change their orientation, Thanks to [tonyr59h](https://github.com/t
 also the gradle build version was updated to 0.7.+
 ![image](https://lh5.googleusercontent.com/-3KSukk_S94Y/UvKiNER-OBI/AAAAAAAAA-k/8SPfOmFhLjE//device-2014-02-05-180704_framed.png)
 
+<h3>UDPATE 2</h3>
+Added support for wheel color scroll by specified angle, exposed additional attributes for bars UI, 
+added hierarchy for color bars classes, added chessboard pattern for Opacity bar (code by Daniel Nilsson),
+Also the gradle build version was updated to 7.0.+
+
 
 <h2>Documentation</h2>
 
