@@ -88,8 +88,8 @@ public class AlphaPatternDrawable extends Drawable {
 
         // recreate bitmap with the pattern
 
-        int numHorizSquares = (int) Math.ceil(bounds.width() / (float)mSquareSize);
-        int numVertSquares = (int) Math.ceil(bounds.height() / (float)mSquareSize);
+        int numHorizSquares = (int) Math.ceil(bounds.width() / (float) mSquareSize);
+        int numVertSquares = (int) Math.ceil(bounds.height() / (float) mSquareSize);
 
         mBitmap = Bitmap.createBitmap(getBounds().width(), getBounds().height(), Config.ARGB_8888);
         Canvas canvas = new Canvas(mBitmap);

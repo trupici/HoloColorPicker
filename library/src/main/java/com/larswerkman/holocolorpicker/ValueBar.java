@@ -40,8 +40,8 @@ public class ValueBar extends ColorBar {
     private OnValueChangedListener onValueChangedListener;
     
 	/**
-	 * Value of the latest entry of the onValueChangedListener.
-	 */
+     * Value of the latest entry of the onValueChangedListener.
+     */
 	private int oldChangedListenerValue;
 
 
