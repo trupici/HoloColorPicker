@@ -1,6 +1,5 @@
 /*
  * Copyright 2012 Lars Werkman
- * Copyright 2021 Juraj Antal
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -535,8 +534,9 @@ public class ColorPicker extends View {
      *              true for shades of grey. You have been warned!
      */
     public void setColor(int color) {
+        mColor = color;
         mAngle = colorToAngle(color);
-        mPointerColor.setColor(calculateColor(mAngle));
+        mPointerColor.setColor(color); // calculateColor(mAngle)
 
         // check of the instance isn't null
         if (mOpacityBar != null) {
@@ -637,26 +637,7 @@ public class ColorPicker extends View {
             case MotionEvent.ACTION_MOVE:
                 if (mUserIsMovingPointer) {
                     mAngle = (float) Math.atan2(y - mSlopY, x - mSlopX);
-                    mPointerColor.setColor(calculateColor(mAngle));
-
-                    setNewCenterColor(mCenterNewColor = calculateColor(mAngle));
-
-                    if (mOpacityBar != null) {
-                        mOpacityBar.setColor(mColor);
-                    }
-
-                    if (mValueBar != null) {
-                        mValueBar.setColor(mColor);
-                    }
-
-                    if (mSaturationBar != null) {
-                        mSaturationBar.setColor(mColor);
-                    }
-
-                    if (mSVbar != null) {
-                        mSVbar.setColor(mColor);
-                    }
-
+                    setColor(calculateColor(mAngle));
                     invalidate();
                 }
                 // If user did not press pointer or center, report event not handled
