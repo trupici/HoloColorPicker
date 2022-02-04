@@ -230,6 +230,16 @@ public class ColorPicker extends View {
     private ValueBar mValueBar = null;
 
     /**
+     * Default pointer color
+     */
+    protected int mPointerDefaultColor;
+
+    /**
+     * Flag whether pointer color is fixed
+     */
+    protected boolean mPointerColorFixed;
+
+    /**
      * {@code onColorChangedListener} instance of the onColorChangedListener
      */
     private OnColorChangedListener onColorChangedListener;
@@ -358,7 +368,20 @@ public class ColorPicker extends View {
                 R.styleable.ColorPicker_color_pointer_halo_radius,
                 b.getDimensionPixelSize(R.dimen.color_pointer_halo_radius));
 
+        // color pointer halo effect color
+        int pointerHaloColor = a.getColor(
+                R.styleable.ColorPicker_color_pointer_halo_color,
+                b.getColor(R.color.color_pointer_halo_color, null));
+
+        mPointerDefaultColor = a.getColor(
+                R.styleable.ColorPicker_color_pointer_default_color,
+                b.getColor(R.color.color_pointer_default_color, null));
+        mPointerColorFixed = a.getBoolean(
+                R.styleable.ColorPicker_color_pointer_fixed_color,
+                b.getBoolean(R.bool.color_pointer_fixed_color));
+
         a.recycle();
+
 
         mAngle = (float) (-Math.PI / 2);
 
@@ -370,10 +393,10 @@ public class ColorPicker extends View {
         mColorWheelPaint.setStrokeWidth(mColorWheelThickness);
 
         mPointerHaloPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPointerHaloPaint.setColor(Color.BLACK);
-        mPointerHaloPaint.setAlpha(0x50);
+        mPointerHaloPaint.setColor(pointerHaloColor);
 
-        mPointerColor = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPointerColor = new FixedColorPaint(mPointerDefaultColor, mPointerColorFixed);
+        mPointerColor.setAntiAlias(true);
         mPointerColor.setColor(calculateColor(mAngle));
 
         mCenterNewPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

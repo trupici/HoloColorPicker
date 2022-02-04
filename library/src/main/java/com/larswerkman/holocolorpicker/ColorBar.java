@@ -85,7 +85,7 @@ public abstract class ColorBar extends View {
     /**
      * {@code Paint} instance used to draw the pointer.
      */
-    protected Paint mBarPointerPaint;
+    protected FixedColorPaint mBarPointerPaint;
 
     /**
      * {@code Paint} instance used to draw the halo of the pointer.
@@ -152,6 +152,16 @@ public abstract class ColorBar extends View {
     protected int mBarPointerDefaultColor;
 
     /**
+     * Flag whether pointer color is fixed
+     */
+    protected boolean mBarPointerColorFixed;
+
+    /*
+     * Radius for bar corners. 0 means rectangular
+     */
+    protected int mBarCornerRadius;
+
+    /**
      * Set the bar color. <br>
      * <br>
      * Its discouraged to use this method.
@@ -200,6 +210,12 @@ public abstract class ColorBar extends View {
         mBarPointerDefaultColor = a.getColor(
                 R.styleable.ColorBar_bar_pointer_default_color,
                 b.getColor(R.color.bar_pointer_default_color, null));
+        mBarPointerColorFixed = a.getBoolean(
+                R.styleable.ColorBar_bar_pointer_fixed_color,
+                b.getBoolean(R.bool.bar_pointer_fixed_color));
+        mBarCornerRadius = a.getInteger(
+                R.styleable.ColorBar_bar_corner_radius,
+                b.getInteger(R.integer.bar_corner_radius));
         a.recycle();
 
         mBarPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -210,8 +226,8 @@ public abstract class ColorBar extends View {
         mBarPointerHaloPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBarPointerHaloPaint.setColor(mBarPointerTransparencyColor);
 
-        mBarPointerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mBarPointerPaint.setColor(mBarPointerDefaultColor);
+        mBarPointerPaint = new FixedColorPaint(mBarPointerDefaultColor, mBarPointerColorFixed);
+        mBarPointerPaint.setAntiAlias(true);
     }
 
     @Override
@@ -273,7 +289,7 @@ public abstract class ColorBar extends View {
     protected void onDraw(Canvas canvas) {
 
         // Draw the bar.
-        canvas.drawRect(mBarRect, mBarPaint);
+        canvas.drawRoundRect(mBarRect, mBarCornerRadius, mBarCornerRadius, mBarPaint);
 
         // Calculate the center of the pointer.
         int cX, cY;

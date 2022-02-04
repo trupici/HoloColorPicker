@@ -22,6 +22,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Shader;
 import android.os.Bundle;
@@ -55,6 +56,11 @@ public class OpacityBar extends ColorBar {
      * Drawable to draw transparency chessboard pattern on the bar
      */
     private AlphaPatternDrawable mAlphaPatternDrawable;
+
+    /**
+     * Clip path for rounded corners
+     */
+    Path mClipPath;
 
     public interface OnOpacityChangedListener {
         public void onOpacityChanged(int opacity);
@@ -98,6 +104,9 @@ public class OpacityBar extends ColorBar {
         mValueToPosFactor = ((float) mBarLength) / 0xFF;
 
         mAlphaPatternDrawable = new AlphaPatternDrawable(mBarAlphaSquareSize);
+
+        mClipPath = new Path();
+        mClipPath.addRoundRect(mBarRect, mBarCornerRadius, mBarCornerRadius, Path.Direction.CW);
     }
 
     @Override
@@ -146,12 +155,21 @@ public class OpacityBar extends ColorBar {
                 Math.round(mBarRect.top),
                 Math.round(mBarRect.right),
                 Math.round(mBarRect.bottom));
+
+        mClipPath.reset();
+        mClipPath.addRoundRect(mBarRect, mBarCornerRadius, mBarCornerRadius, Path.Direction.CCW);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         // Draw the bar.
+        canvas.save();
+        if (mBarCornerRadius > 0 && mClipPath != null) {
+            canvas.clipPath(mClipPath);
+        }
+
         mAlphaPatternDrawable.draw(canvas);
+        canvas.restore();
         super.onDraw(canvas);
     }
 

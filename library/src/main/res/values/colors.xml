@@ -2,9 +2,17 @@
 <resources>
 
     <!--
+    Standard colors for color wheel pointer
+     -->
+    <color name="color_pointer_halo_color">#50000000</color>
+    <color name="color_pointer_default_color">#ffffff</color>
+    <bool name="color_pointer_fixed_color">false</bool>
+
+    <!--
         Standard colors for color bars
      -->
     <color name="bar_pointer_halo_color">#50000000</color>
-    <color name="bar_pointer_default_color">#ff81ff00</color>
+    <color name="bar_pointer_default_color">#ffffff</color>
+    <bool name="bar_pointer_fixed_color">false</bool>
 
 </resources>

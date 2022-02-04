@@ -8,6 +8,9 @@
         <attr name="color_center_halo_radius" format="dimension"/>
         <attr name="color_pointer_radius" format="dimension" />
         <attr name="color_pointer_halo_radius" format="dimension" />
+        <attr name="color_pointer_halo_color" format="color" />
+        <attr name="color_pointer_fixed_color" format="boolean" />
+        <attr name="color_pointer_default_color" format="color" />
     </declare-styleable>
     <declare-styleable name="ColorBar">
         <attr name="bar_thickness" format="dimension" />
@@ -17,7 +20,9 @@
         <attr name="bar_orientation_horizontal" format="boolean" />
         <attr name="bar_transparency_square_size" format="dimension" />
         <attr name="bar_pointer_halo_color" format="color" />
+        <attr name="bar_pointer_fixed_color" format="boolean" />
         <attr name="bar_pointer_default_color" format="color" />
+        <attr name="bar_corner_radius" format="integer" />
     </declare-styleable>
 
 </resources>
